@@ -26,8 +26,7 @@ from oauth2client import file
 from oauth2client import tools
 
 # Set doc ID, as found at `https://docs.google.com/document/d/YOUR_DOC_ID/edit`
-DOCUMENT_ID = '15nynAWHjtVpRqqgqKwFsWCzezRQYMqtwySzvWQUwNxM'
-
+DOCUMENT_ID = '1YWjv-upS17eVNfAOMweqDBJXfibsAVe8XyygOGoLurI'
 # Set the scopes and discovery info
 SCOPES = 'https://www.googleapis.com/auth/documents.readonly'
 DISCOVERY_DOC = ('https://docs.googleapis.com/$discovery/rest?'

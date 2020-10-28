@@ -16,7 +16,11 @@ Done by google,
 as doc2json.py
 
 2. Parse Heading Info separately
+Done, need to apply some minor extra formatting
 
-3. Add indexing to heading data
-4. Add page numbers to heading data
-5. Print formatted
+3. Add link functionality to headers
+
+Note: as of now, approach requires an user to insert section breaks where
+pages end. This is impractical as these would move around upon later changes.
+A possible future solution is to allow functionality to remove section breaks.
+Then, user would need to manually insert the new ones, then generate index.
