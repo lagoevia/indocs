@@ -1,7 +1,10 @@
 import doc2json as dj
 import json
+import sys
 
 outputs = [] # output strings to print
+headingValues = { 'TITLE': 0, 'SUBTITLE': 1, 'HEADING_1': 2,
+        'HEADING_2': 3, 'HEADING_3': 4, 'HEADING_4': 5 }
 
 def parseHeadingInfo(doc):
     quantity = doc['body']['content']
@@ -33,8 +36,10 @@ def parseHeadingInfo(doc):
                     continue
                 #text_content = el['paragraph']['elements']['textRun']['content']
                 if 'HEADING_' in text_type or 'TITLE' in text_type:
+                    hv = headingValues[text_type]
+                    tabs = hv * '    '
                     print("Found a heading!", text_type, "on page", page, "content", text_content)
-                    outputs.append(text_type + " " + text_content + " " + str(page))
+                    outputs.append(str(page) + "~" + tabs + text_content) 
             if 'startIndex' in el:
                 print(el['startIndex'])
             if 'endIndex' in el:
@@ -51,13 +56,15 @@ with open('.dump', 'w') as f:
     f.close()
 parseHeadingInfo(doc)
 
-for heading in outputs:
-    print(heading)
+L = int(sys.argv[1]) if len(sys.argv) > 1 else 80
+padChar = '.'
+for line in outputs:
+        delim = line.index('~')
+        pageNumber = line[0:delim]
+        l = len(line) - len(pageNumber) - 1
+        pad = L - l - len(pageNumber)
+        # TODO: include URL's here to bit in code
+        print(line[delim+1:len(line)], padChar * pad, str(pageNumber),
+                sep='') 
+        #print(heading)
 
-# TODO: impl func below
-"""
-need to:
-    1. assign correct "id" to heading according to nested, etc
-    2. "tab" = nested heading level
-    3. impl pad with \. (or any other char)
-"""
